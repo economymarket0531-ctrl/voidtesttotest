@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seu Nome | Links</title>
+<meta name="theme-color" content="#0a0612">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&family=Pixelify+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== CORES ===== */
+:root{
+  --preto:#07030f; --roxo:#7c3aed; --roxo-claro:#c4a1ff; --texto:#f1e8ff;
+  --vidro:rgba(14,7,28,.58); --borda:rgba(176,132,255,.38);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{
+  background:var(--preto); color:var(--texto);
+  font-family:"Outfit",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  display:flex; justify-content:center; align-items:flex-start;
+  padding:48px 18px; overflow-x:hidden;
+}
+
+/* ===== FUNDO BORRADO ===== */
+#fundo{position:fixed;inset:0;z-index:-2;overflow:hidden;background:#0a0612 center/cover no-repeat}
+#cena{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;filter:blur(7px) saturate(1.2);transform:scale(1.15)}
+#fundo.foto{filter:blur(8px) brightness(.55) saturate(1.2);transform:scale(1.1)}
+#fundo.foto #cena{display:none}
+#vinheta{position:fixed;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at 50% 30%,rgba(124,58,237,.12),rgba(7,3,15,.78) 85%)}
+
+/* ===== CARTÃO ===== */
+main{
+  width:100%;max-width:440px;text-align:center;padding:38px 24px 28px;
+  background:var(--vidro);border:1px solid var(--borda);border-radius:26px;
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  box-shadow:0 0 70px rgba(124,58,237,.28),inset 0 0 0 1px rgba(255,255,255,.03);
+  animation:entra .8s ease both;
+}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.avatar{
+  width:96px;height:96px;margin:0 auto 18px;border-radius:20px;
+  display:grid;place-items:center;
+  font:700 44px "Pixelify Sans",monospace;color:#fff;
+  background:linear-gradient(145deg,#a855f7,#4c1d95);
+  border:2px solid var(--roxo-claro);
+  box-shadow:0 0 28px rgba(168,85,247,.7),inset 0 -6px 0 rgba(0,0,0,.25);
+}
+img.avatar{object-fit:cover;display:block}
+
+h1{font:700 2.1rem "Pixelify Sans",monospace;letter-spacing:.02em;text-shadow:0 0 18px rgba(168,85,247,.85)}
+.bio{margin:10px auto 28px;max-width:32ch;line-height:1.5;color:var(--roxo-claro);opacity:.9}
+
+/* ===== BOTÕES ===== */
+.links{list-style:none;padding:0;display:grid;gap:14px}
+.links a{
+  display:block;padding:15px 20px;border-radius:14px;
+  color:var(--texto);text-decoration:none;font-weight:600;font-size:1.05rem;
+  background:rgba(48,20,94,.42);border:1px solid var(--borda);
+  transition:transform .18s,background .18s,box-shadow .18s,border-color .18s;
+}
+.links a:hover,.links a:focus-visible{
+  transform:translateY(-3px);background:rgba(124,58,237,.6);border-color:#d8c2ff;
+  box-shadow:0 8px 28px rgba(124,58,237,.55);
+}
+.links a:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.links a.principal{background:linear-gradient(135deg,#6d28d9,#a855f7);border-color:#d8c2ff;box-shadow:0 0 24px rgba(168,85,247,.5)}
+
+footer{margin-top:30px;font-size:.82rem;color:var(--roxo-claro);opacity:.55}
+
+@media (prefers-reduced-motion:reduce){main{animation:none}.links a{transition:none}}
+</style>
+</head>
+<body>
+<div id="fundo"><canvas id="cena"></canvas></div>
+<div id="vinheta"></div>
+
+<main>
+  <!-- ===== EDITE AQUI: inicial, nome e bio ===== -->
+  <div class="avatar" aria-hidden="true">S</div>
+  <h1>Seu Nome</h1>
+  <p class="bio">Uma frase curta sobre você ou sobre o que você faz.</p>
+
+  <!-- ===== EDITE AQUI: troque os links ===== -->
+  <ul class="links">
+    <li><a class="principal" href="#">Meu site</a></li>
+    <li><a href="https://wa.me/55SEUNUMERO">WhatsApp</a></li>
+    <li><a href="https://instagram.com/seuusuario">Instagram</a></li>
+    <li><a href="#">YouTube</a></li>
+    <li><a href="#">Discord</a></li>
+  </ul>
+
+  <footer>© 2026 Seu Nome</footer>
+</main>
+
+<script>
+/* Cena de blocos em pixel, desenhada por código e borrada pelo CSS */
+(function(){
+  const c=document.getElementById('cena'),x=c.getContext('2d');
+  const W=240,H=135,B=5;c.width=W;c.height=H;
+  let s=11;const r=()=>(s=(s*16807)%2147483647)/2147483647;
+
+  // céu em faixas
+  const top=[8,5,18],bot=[104,46,178];
+  for(let y=0;y<H;y+=3){
+    const t=Math.pow(y/H,1.5);
+    x.fillStyle='rgb('+top.map((v,i)=>Math.round(v+(bot[i]-v)*t))+')';
+    x.fillRect(0,y,W,3);
+  }
+  // estrelas
+  for(let i=0;i<90;i++){
+    x.fillStyle='rgba(235,222,255,'+(.25+r()*.75)+')';
+    x.fillRect(Math.floor(r()*W),Math.floor(r()*H*.55),1,1);
+  }
+  // lua quadrada
+  const mx=Math.floor(W*.72),my=16;
+  x.fillStyle='rgba(200,170,255,.10)';x.fillRect(mx-12,my-12,36,36);
+  x.fillStyle='rgba(200,170,255,.18)';x.fillRect(mx-6,my-6,24,24);
+  x.fillStyle='#f3ecff';x.fillRect(mx,my,12,12);
+
+  // colinas em camadas + árvores de blocos
+  const camadas=[
+    {b:.60,a:10,cor:'#52248f'},{b:.70,a:9,cor:'#331566'},
+    {b:.80,a:8,cor:'#1a0a36'},{b:.91,a:6,cor:'#07030f'}
+  ];
+  camadas.forEach((L,k)=>{
+    x.fillStyle=L.cor;
+    for(let i=0;i<W;i+=B){
+      const h=Math.round((L.b*H+Math.sin(i*.06+k*2)*L.a+Math.sin(i*.17+k)*L.a*.4)/B)*B;
+      x.fillRect(i,h,B,H-h);
+      x.fillStyle='rgba(255,255,255,.07)';x.fillRect(i,h,B,B);x.fillStyle=L.cor;
+      if(k>=1&&k<=2&&r()<.13){
+        x.fillRect(i,h-3*B,B,3*B);
+        x.fillRect(i-B,h-4*B,3*B,2*B);
+        x.fillRect(i,h-5*B,B,B);
+      }
+    }
+  });
+})();
+
+/* Quer usar um print seu de fundo? Suba uma imagem chamada fundo.jpg no repositório. */
+(function(){
+  const im=new Image();
+  im.onload=function(){
+    const f=document.getElementById('fundo');
+    f.style.backgroundImage='url(fundo.jpg)';f.classList.add('foto');
+  };
+  im.src='fundo.jpg';
+})();
+</script>
+</body>
+</html>
