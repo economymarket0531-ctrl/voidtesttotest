@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seu Nome | Links</title>
+  <meta name="description" content="Meus links em um só lugar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== CORES: troque aqui para mudar o visual todo ===== */
+    :root {
+      --fundo: #efeaff;
+      --tinta: #1b1340;
+      --destaque: #5b3df5;
+      --botao: #ffffff;
+      --botao-hover: #ffd23f;
+      --sombra: #1b1340;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fundo: #14102b;
+        --tinta: #f3efff;
+        --destaque: #a493ff;
+        --botao: #221b4a;
+        --botao-hover: #ffd23f;
+        --sombra: #a493ff;
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--fundo);
+      color: var(--tinta);
+      font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 56px 20px 40px;
+    }
+
+    main { width: 100%; max-width: 480px; text-align: center; }
+
+    /* ===== PERFIL ===== */
+    .avatar {
+      width: 96px; height: 96px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: var(--destaque);
+      color: #fff;
+      display: grid; place-items: center;
+      font-size: 42px; font-weight: 800;
+      border: 3px solid var(--tinta);
+      box-shadow: 5px 5px 0 var(--sombra);
+    }
+    /* Para usar foto: <img class="avatar" src="foto.jpg" alt="Seu Nome"> */
+    img.avatar { object-fit: cover; display: block; }
+
+    h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+    .bio { margin: 8px auto 32px; max-width: 34ch; font-size: 1.05rem; line-height: 1.45; opacity: .8; }
+
+    /* ===== BOTÕES ===== */
+    .links { list-style: none; padding: 0; display: grid; gap: 16px; }
+
+    .links a {
+      display: block;
+      padding: 16px 22px;
+      background: var(--botao);
+      color: var(--tinta);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      border: 3px solid var(--tinta);
+      border-radius: 999px;
+      box-shadow: 5px 5px 0 var(--sombra);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .links a:hover, .links a:focus-visible {
+      background: var(--botao-hover);
+      color: #1b1340;
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--sombra);
+    }
+    .links a:active { transform: translate(5px, 5px); box-shadow: 0 0 0 var(--sombra); }
+    .links a:focus-visible { outline: 3px solid var(--destaque); outline-offset: 4px; }
+
+    /* Botão principal em destaque */
+    .links a.principal { background: var(--destaque); color: #fff; }
+    .links a.principal:hover, .links a.principal:focus-visible { background: var(--botao-hover); color: #1b1340; }
+
+    footer { margin-top: 40px; font-size: .85rem; opacity: .6; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .links a { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- ===== EDITE AQUI: inicial do avatar, nome e bio ===== -->
+    <div class="avatar" aria-hidden="true">S</div>
+    <h1>Seu Nome</h1>
+    <p class="bio">Uma frase curta sobre você ou sobre o que você faz.</p>
+
+    <!-- ===== EDITE AQUI: troque o href="#" pelo seu link real ===== -->
+    <ul class="links">
+      <li><a class="principal" href="#">Meu site</a></li>
+      <li><a href="https://wa.me/55SEUNUMERO">Fale comigo no WhatsApp</a></li>
+      <li><a href="https://instagram.com/seuusuario">Instagram</a></li>
+      <li><a href="#">YouTube</a></li>
+      <li><a href="#">Meu portfólio</a></li>
+    </ul>
+
+    <footer>© 2026 Seu Nome</footer>
+  </main>
+</body>
+</html>
